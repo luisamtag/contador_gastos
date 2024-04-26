@@ -1,14 +1,29 @@
 import { Account, CategoryEnum, Entry } from "./Account.js"
 
-console.log('Luisa code <3 <3')
+let account: Account;
+const InitialAccount = getAccountFromStorage();
 
-const account = new Account();
+if(InitialAccount){
+    account = new Account(InitialAccount as Account);
+}else{
+    account = createInitialAccount();
+}
 
-console.log(account);
+function createInitialAccount(): Account{
+    const setupAccount = new Account();
+    const expenseEjemplo = new Entry ('Ejemplo de gastos',
+    425000,
+    CategoryEnum.expense);
+    const incomeEjemplo = new Entry ('Ejemplo de ingresos',
+    632000,
+    CategoryEnum.income);
 
-const expenseEjemplo = new Entry ('Ejemplo de gastos', 425000, CategoryEnum.expense);
-const incomeEjemplo = new Entry ('Ejemplo de ingresos', 632000, CategoryEnum.income);
-account.addEntry(expenseEjemplo);
-account.addEntry(incomeEjemplo);
+    setupAccount.addEntry(expenseEjemplo);
+    setupAccount.addEntry(incomeEjemplo);
 
-console.log(account);
+return setupAccount;
+}
+function getAccountFromStorage(): Account | boolean{
+    const accountFromStorage = localStorage.getItem('account');
+    return accountFromStorage ? JSON.parse(accountFromStorage) : false;
+}
