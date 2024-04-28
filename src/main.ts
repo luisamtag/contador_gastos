@@ -55,8 +55,10 @@ function printEntry(entry: Entry) {
     const entryConceptTemplate = entryTemplate.content.querySelector('.entryConcept');
     const entryAmountTemplate = entryTemplate.content.querySelector('.entryAmount');
     const entryContaninerTemplate = entryTemplate.content.querySelector('div');
+    const iconSvg = entryTemplate.content.querySelector('svg');
+    const svgPath = entryTemplate.content.querySelector('path');
 
-    if(!entryConceptTemplate || !entryAmountTemplate|| !entryContaninerTemplate){
+    if(!entryConceptTemplate || !entryAmountTemplate|| !entryContaninerTemplate || !iconSvg || !svgPath){
         return;
     }
 
